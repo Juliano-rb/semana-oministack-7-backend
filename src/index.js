@@ -13,13 +13,14 @@ mongoose.connect('mongodb+srv://julianoro:onailuj123@cluster0-wfnn3.mongodb.net/
 })
 
 app.use((req,res,next)=>{
-    req.io = io
+    req.io = io;
     
-    next()
+    next();
 })
 
-app.use(cors())
+app.use(cors());
+
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads', 'resized')) )
 app.use(require('./routes'))
 
-app.listen(3333)
+server.listen(3333)

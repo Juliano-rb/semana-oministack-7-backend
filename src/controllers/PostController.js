@@ -35,5 +35,22 @@ module.exports = {
         req.io.emit('post', post)
 
         return res.json(post)
+    },
+
+    async remove(req, res){
+        const post = await Post.findById(req.params.id)
+        const fileName = path.resolve('uploads/resized', post.image)
+
+        fs.exists(fileName, (exists) => {
+            exists ? fs.unlinkSync(fileName) : console.log(`file ${fileName} does not exists`)
+        })
+
+        post.remove()
+
+        await post.save()
+
+        req.io.emit('remotion', post)
+
+        return res.json({ok : true})
     }
 }

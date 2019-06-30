@@ -1,4 +1,6 @@
 uploads/*
+!uploads/.gitkeep
+.env
 
 # Logs
 logs
